@@ -10,18 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class DateSortTest {
     Comparator<String> comparator;
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         comparator = (s1, s2) -> {
-            String[] arr1 = s1.split("-");
-            String[] arr2 = s2.split("-");
-            for (int i = arr1.length - 1; i >= 0; i--) {
-                int d1 = Integer.parseInt(arr1[i]);
-                int d2 = Integer.parseInt(arr2[i]);
-                if (d1 > d2) {
+            String[] dates1 = s1.split("-");
+            String[] dates2 = s2.split("-");
+            for (int i = dates1.length - 1; i >= 0; i--) {
+                int date1 = Integer.parseInt(dates1[i]);
+                int date2 = Integer.parseInt(dates2[i]);
+                if (date1 > date2) {
                     return 1;
                 }
-                if (d1 < d2) {
+                if (date1 < date2) {
                     return -1;
                 }
             }
@@ -45,7 +46,16 @@ public class DateSortTest {
                 "15-01-2010",
                 "28-01-2010"
         };
+        printArray(dates);
         Arrays.sort(dates, comparator);
+        printArray(dates);
         assertArrayEquals(expected, dates);
+    }
+
+    private void printArray(String[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+        System.out.println();
     }
 }
